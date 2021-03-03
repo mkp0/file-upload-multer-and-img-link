@@ -49,7 +49,8 @@ app.post("/upload", (req, res) => {
     if (err) res.render("index", { msg: err });
     else {
       console.log(req.file.path);
-      let pathNameOfPic = "http://localhost:3004" + req.file.path.substr(6);
+      let pathNameOfPic =
+        "https://file-uploder-ausm.herokuapp.com/" + req.file.path.substr(6);
       console.log(pathNameOfPic);
       res.json({ linkOfImage: pathNameOfPic });
     }
@@ -57,5 +58,5 @@ app.post("/upload", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("http://localhost:3004");
+  console.log("https://file-uploder-ausm.herokuapp.com/");
 });
