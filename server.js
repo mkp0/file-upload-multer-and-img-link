@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const multer = require("multer");
 const path = require("path");
+const schedule = require("node-schedule");
+const fs = require("fs");
 
 //multer image
 const storage = multer.diskStorage({
@@ -53,6 +55,20 @@ app.post("/upload", (req, res) => {
         "https://file-uploder-ausm.herokuapp.com" + req.file.path.substr(6);
       console.log(pathNameOfPic);
       res.json({ linkOfImage: pathNameOfPic });
+    }
+  });
+});
+
+const directory = "public/upload";
+
+schedule.scheduleJob({ hour: 00, minute: 00 }, () => {
+  fs.readdir(directory, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+      fs.unlink(path.join(directory, file), (err) => {
+        if (err) throw err;
+      });
     }
   });
 });
