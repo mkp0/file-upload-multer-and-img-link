@@ -50,7 +50,7 @@ app.post("/upload", (req, res) => {
     else {
       console.log(req.file.path);
       let pathNameOfPic =
-        "https://file-uploder-ausm.herokuapp.com/" + req.file.path.substr(6);
+        "https://file-uploder-ausm.herokuapp.com" + req.file.path.substr(6);
       console.log(pathNameOfPic);
       res.json({ linkOfImage: pathNameOfPic });
     }
